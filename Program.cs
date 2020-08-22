@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using CsvHelper;
+
 
 namespace FirstBankOfSuncoast
 {
@@ -28,29 +33,59 @@ namespace FirstBankOfSuncoast
                 Console.WriteLine();
             }
 
-            // static int Balance(List<Transaction> transactions, int bal)
-            // {
-            //     foreach (var transaction in transactions)
-            //     {
-            //         if (transaction.TransactionType == "Deposit")
-            //         {
-            //             bal += transaction.Amount;
-            //         }
-            //         else if (transaction.TransactionType == "Withdrawal")
-            //         {
-            //             bal -= transaction.Amount;
-            //         }
-            //     }
-            //     return bal;
-            // }
-
             static void Main(string[] args)
             {
                 Greeting();
+                TextReader reader;
 
-                var transactions = new List<Transaction>();
+                if (File.Exists("Bank-info.csv"))
+                {
+                    reader = new StreamReader("Bank-Info.csv");
+                }
+                else
+                {
+                    reader = new StringReader("");
+                }
+
+                var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+                var transactions = csvReader.GetRecords<Transaction>().ToList();
+
+                reader.Close();
+
                 var checkingBalance = 0;
                 var savingBalance = 0;
+
+                var checkTrans = transactions.Where(transaction => transaction.AccountType == "checking").OrderBy(transaction => transaction.Date);
+                Console.WriteLine("Here are your past checking transactions");
+                Console.WriteLine();
+                foreach (var tran in checkTrans)
+                {
+                    Console.WriteLine($"{tran.TransactionType} of {tran.Amount} on {tran.Date}");
+                }
+                Console.WriteLine("---------------------------------------");
+                var savTrans = transactions.Where(transaction => transaction.AccountType == "saving");
+                Console.WriteLine("Here are your past saving transactions");
+                Console.WriteLine();
+                foreach (var tran in savTrans)
+                {
+                    Console.WriteLine($"{tran.TransactionType} of {tran.Amount} on {tran.Date}");
+                }
+                Console.WriteLine("---------------------------------------");
+
+                foreach (var transaction in transactions)
+                {
+
+                    if (transaction.AccountType == "checking")
+                    {
+
+                        checkingBalance += transaction.Amount;
+                    }
+                    else
+                    {
+                        savingBalance += transaction.Amount;
+                    }
+                }
 
 
                 var quit = false;
@@ -241,7 +276,12 @@ namespace FirstBankOfSuncoast
                     }
                 }
 
+                var fileWriter = new StreamWriter("Bank-Info.csv");
+                var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
 
+                csvWriter.WriteRecords(transactions);
+
+                fileWriter.Close();
 
             }
 
