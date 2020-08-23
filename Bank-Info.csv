@@ -8,3 +8,23 @@ deposit,saving,100,08/21/2020 20:30:09
 deposit,saving,900,08/21/2020 23:34:20
 deposit,checking,300,08/22/2020 10:56:59
 withdrawal,saving,700,08/22/2020 18:05:56
+deposit,checking,2100.5,08/22/2020 18:39:20
+withdrawal,checking,50.4,08/22/2020 18:43:26
+Transfer out,checking,200,08/22/2020 21:15:54
+Transfer in,saving,200,08/22/2020 21:15:54
+Transfer out,saving,600,08/22/2020 21:23:43
+Transfer in,checking,600,08/22/2020 21:23:43
+deposit,saving,50067,08/22/2020 21:24:49
+withdrawal,saving,200.34,08/22/2020 22:37:21
+Transfer out,saving,159.23,08/22/2020 22:39:04
+Transfer in,checking,159.23,08/22/2020 22:39:04
+deposit,checking,49.23,08/23/2020 08:45:28
+deposit,checking,2.1,08/23/2020 08:46:47
+deposit,checking,4.23,08/23/2020 08:47:34
+deposit,checking,3.234,08/23/2020 09:03:10
+deposit,saving,3,08/23/2020 09:03:48
+deposit,saving,1.03,08/23/2020 09:04:55
+withdrawal,saving,40000.04,08/23/2020 09:07:37
+deposit,checking,500,08/23/2020 09:24:49
+Transfer out,checking,5.07,08/23/2020 09:29:04
+Transfer in,saving,5.07,08/23/2020 09:29:04
