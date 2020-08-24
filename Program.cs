@@ -115,7 +115,7 @@ namespace FirstBankOfSuncoast
                     Console.WriteLine($"{tran.TransactionType} of {tran.Amount} on {tran.Date}");
                 }
                 Console.WriteLine("---------------------------------------");
-                var savTrans = transactions.Where(transaction => transaction.AccountType == "saving");
+                var savTrans = transactions.Where(transaction => transaction.AccountType == "saving").OrderBy(transaction => transaction.Date);
                 Console.WriteLine("Here are your past saving transactions");
                 Console.WriteLine();
                 foreach (var tran in savTrans)
